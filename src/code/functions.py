@@ -10,11 +10,11 @@ import pandas as pd
 
 import phonenumbers
 from phonenumbers import geocoder
-
+import ast
 import logging
 
-
-
+import requests
+import json
 import sys
 import operator
 import string
@@ -59,6 +59,17 @@ def extract_name(resume_text):
             span = nlp_text[start:end]
             return span.text
         return ""
+
+def getFlair(text):
+  # @ interne
+  url = 'http://51.103.76.178:7966/flairAll'
+  payload=json.dumps({"text":text}).encode("latin-1")
+  headers = {'Content-Type': 'application/json'}
+  response = ast.literal_eval(requests.request("POST", url, headers=headers, data=payload).text)
+  for i in response:
+      if i[0] == 'PER':
+          return i
+  return []
 
 # def extract_university(text, file):
 #         df = pd.read_csv(file, header=None)
