@@ -1,0 +1,43 @@
+version: '3.4'
+services:
+  regexparser:
+    image: registry.marketfiler.com/regexparser:latest
+    expose:
+      - 80
+    ports:
+      - 7955:80
+    deploy:
+      placement:
+        constraints:  [node.hostname != v1-mtm-manager-1]
+      labels:
+#        - "traefik.http.routers.match.rule=Host(`skillnorm.marketfiler.com`)"
+        - "traefik.enable=true"
+        - "traefik.docker.network=public"  
+        - "traefik.http.routers.regexparser.tls.certresolver=let"
+        - "traefik.http.routers.regexparser.entrypoints=websecure"
+        - "traefik.http.services.regexparser.loadbalancer.server.port=7955"
+#        - "traefik.http.routers.test_0.rule=Host(`test.marketfiler.com`)"
+#        - "traefik.enable=true"
+#        - "traefik.docker.network=web"
+#        - "traefik.port=80"
+#        - "traefik.frontend.rule=Host:marketfiler.com/test"
+#        - "traefik.http.routers.test_0.tls.certresolver=let"
+#        - "traefik.http.routers.test_0.entrypoints=web"
+#        - "traefik.http.services.test_0.loadbalancer.server.port=80" # it seems you always need to give traefik a port so it 'notices' the service
+#        - "traefik.http.routers.test_0-secured.rule=Host(`marketfiler.com`)"
+#        - "traefik.http.routers.test_0-secured.entrypoints=websecure"
+#        - traefik.http.routers.test_0.entryPoints=web
+#        - traefik.http.routers.test_0.service=test_0
+#        - traefik.docker.network=traefik-public
+#        - "traefik.http.routers.test_0.tls=true"
+      replicas: 2
+      update_config:
+        parallelism: 1
+        order: start-first
+        #failure_action: rollback
+        delay: 10s
+    networks:
+      - public
+networks:
+    public:
+       external: true
