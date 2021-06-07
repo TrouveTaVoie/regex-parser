@@ -17,6 +17,8 @@ PATH='/www/data/'
 app = Flask(__name__)
 CORS(app)
 
+
+
 def cos_sim(a,b):
     cos_sim = dot(a, b)/(norm(a)*norm(b))
     return cos_sim
