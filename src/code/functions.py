@@ -19,7 +19,6 @@ import sys
 import operator
 import string
 
-    
 def location(num):
     try:
         loc = geocoder.description_for_number(phonenumbers.parse(num, None), "fr")
