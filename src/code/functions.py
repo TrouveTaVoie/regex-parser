@@ -21,7 +21,11 @@ import string
 
     
 def location(num):
-    return geocoder.description_for_number(phonenumbers.parse(num, None), "fr")
+    try:
+        loc = geocoder.description_for_number(phonenumbers.parse(num, None), "fr")
+    except:
+        loc = ""
+    return loc
 def find_phone(text):
         try:
             return list(iter(phonenumbers.PhoneNumberMatcher(text, None)))[0].raw_string
