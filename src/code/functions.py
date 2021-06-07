@@ -36,6 +36,10 @@ def find_phone(text):
             except:
                 return ""
 
+def myPhone(text):
+    ex = r"(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+    return re.findall(ex, text)
+    
 def extract_email(text):
         email = re.findall(r"([^@|\s]+@[^@]+\.[^@|\s]+)", text)
         if email:
@@ -44,21 +48,21 @@ def extract_email(text):
             except IndexError:
                 return None
 
-def extract_name(resume_text):
-        nlp_text = nlp(resume_text)
+# def extract_name(resume_text):
+#         nlp_text = nlp(resume_text)
 
-        # First name and Last name are always Proper Nouns
-        # pattern_FML = [{'POS': 'PROPN', 'ENT_TYPE': 'PERSON', 'OP': '+'}]
+#         # First name and Last name are always Proper Nouns
+#         # pattern_FML = [{'POS': 'PROPN', 'ENT_TYPE': 'PERSON', 'OP': '+'}]
 
-        pattern = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
-        matcher.add('NAME', None, pattern)
+#         pattern = [{'POS': 'PROPN'}, {'POS': 'PROPN'}]
+#         matcher.add('NAME', None, pattern)
 
-        matches = matcher(nlp_text)
+#         matches = matcher(nlp_text)
 
-        for match_id, start, end in matches:
-            span = nlp_text[start:end]
-            return span.text
-        return ""
+#         for match_id, start, end in matches:
+#             span = nlp_text[start:end]
+#             return span.text
+#         return ""
 
 def getFlair(text):
   # @ interne

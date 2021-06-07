@@ -29,7 +29,9 @@ def getInfos():
    text = j_data['text']
    email = functions.extract_email(text)
    phone = functions.find_phone(text)
-   return {"nameInfo":functions.getFlair(text), "email":email, "phone":phone, "localisation":functions.location(phone)}
+   if phone == "" or phone == []:
+      phone = functions.myPhone(text)
+   return {"nameInfo":functions.getFlair(text), "email":email, "phone":[phone], "localisation":functions.location(phone)}
 
 # @app.route('/getInfosRes', methods=['GET', 'POST'])
 # def getInfosRes():
