@@ -37,9 +37,9 @@ def find_phone(text):
                 return ""
 
 def myPhone(text):
-    ex = r"(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+    ex = r"(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}"
     return re.findall(ex, text)
-    
+
 def extract_email(text):
         email = re.findall(r"([^@|\s]+@[^@]+\.[^@|\s]+)", text)
         if email:
