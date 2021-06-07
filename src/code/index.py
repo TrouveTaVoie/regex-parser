@@ -26,7 +26,7 @@ def getInfos():
    text = j_data['text']
    email = functions.extract_email(text)
    phone = functions.find_phone(text)
-   return {"email":email, "phone":phone}
+   return {"email":email, "phone":phone, "localisation":functions.location(phone)}
 
 if __name__ == '__main__':
     bjoern.run(app, host='0.0.0.0',port = 80)

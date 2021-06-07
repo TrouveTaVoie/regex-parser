@@ -9,7 +9,7 @@ from datetime import date
 import pandas as pd
 
 import phonenumbers
-
+from phonenumbers import geocoder
 
 import logging
 
@@ -20,7 +20,8 @@ import operator
 import string
 
     
-
+def location(num):
+    return geocoder.description_for_number(phonenumbers.parse(num, None), "fr")
 def find_phone(text):
         try:
             return list(iter(phonenumbers.PhoneNumberMatcher(text, None)))[0].raw_string
