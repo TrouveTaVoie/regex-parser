@@ -11,7 +11,7 @@ from flask_cors import CORS
 import ast
 import requests
 import functions
-from resume_parser import resumeparse
+# from resume_parser import resumeparse
 PATH='/www/data/'
 #app = falcon.API()
 app = Flask(__name__)
@@ -29,14 +29,14 @@ def getInfos():
    phone = functions.find_phone(text)
    return {"email":email, "phone":phone, "localisation":functions.location(phone)}
 
-@app.route('/getInfosRes', methods=['GET', 'POST'])
-def getInfosRes():
-   j_data = request.json
-   text = j_data['text']
-   email = resumeparse.extract_email(text)
-   phone = resumeparse.find_phone(text)
-   name = resumeparse.extract_name(text)
-   return {"name":name, "email":email, "phone":phone, "localisation":functions.location(phone)}
+# @app.route('/getInfosRes', methods=['GET', 'POST'])
+# def getInfosRes():
+#    j_data = request.json
+#    text = j_data['text']
+#    email = resumeparse.extract_email(text)
+#    phone = resumeparse.find_phone(text)
+#    name = resumeparse.extract_name(text)
+#    return {"name":name, "email":email, "phone":phone, "localisation":functions.location(phone)}
 
 if __name__ == '__main__':
     bjoern.run(app, host='0.0.0.0',port = 80)
