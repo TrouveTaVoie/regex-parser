@@ -31,7 +31,7 @@ def getInfos():
    phone = functions.find_phone(text)
    if phone == "" or phone == []:
       phone = functions.myPhone(text)
-   return {"nameInfo":functions.getFlair(text), "email":email, "phone":[phone], "localisation":functions.location(phone)}
+   return {"nameInfo":functions.getFlair(text), "email":email, "phone":phone, "localisation":functions.location(phone)}
 
 # @app.route('/getInfosRes', methods=['GET', 'POST'])
 # def getInfosRes():
